@@ -24,6 +24,7 @@ FileDiskUtilized()
 	FILE_SYSTEM_SIZE=$(df -h $DIR_FILE_TO_ANALYZE)
 	echo "[INFO] File system size of [$DIR_FILE_TO_ANALYZE]:"
 	echo "$FILE_SYSTEM_SIZE"
+	echo "checking size"
 }
 
 ValidateInput $1
