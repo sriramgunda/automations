@@ -21,10 +21,19 @@ FileSize()
 
 FileDiskUtilized()
 {
+	IFS=' '
+	alleles=()
 	FILE_SYSTEM_SIZE=$(df -h $DIR_FILE_TO_ANALYZE)
 	echo "[INFO] File system size of [$DIR_FILE_TO_ANALYZE]:"
-	echo "$FILE_SYSTEM_SIZE"
-	echo "checking size"
+	echo "$FILE_SYSTEM_SIZE" | sed 's/.*%//' | sed 's/ Mounted on//' | xargs
+	echo "$FILE_SYSTEM_SIZE" > fsize.txt
+	while read line; do 
+		echo $line
+		read -r -a arr <<< "$line"
+		alleles+=($arr)
+		
+	done < fsize.txt
+	echo $alleles
 }
 
 ValidateInput $1
